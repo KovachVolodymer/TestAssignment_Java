@@ -1,4 +1,4 @@
-package org.example.testassignment_java.security.services.auth;
+package org.example.testassignment_java.services.auth;
 
 import org.example.testassignment_java.model.User;
 import org.example.testassignment_java.payload.request.LoginRequest;

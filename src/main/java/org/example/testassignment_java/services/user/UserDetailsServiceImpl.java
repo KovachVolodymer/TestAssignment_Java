@@ -1,4 +1,4 @@
-package org.example.testassignment_java.security.services;
+package org.example.testassignment_java.services.user;
 
 import org.example.testassignment_java.model.User;
 import org.example.testassignment_java.repository.UserRepository;
