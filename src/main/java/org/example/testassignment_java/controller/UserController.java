@@ -6,12 +6,14 @@ import org.example.testassignment_java.repository.UserRepository;
 import org.example.testassignment_java.security.jwt.JwtUtil;
 import org.example.testassignment_java.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.Optional;
 import java.util.Set;
 
@@ -149,6 +151,16 @@ public class UserController {
         userOptional.get().setRoles(roles);
         userRepository.save(userOptional.get());
         return ResponseEntity.ok().body(new MessageResponse("Add new role"));
+    }
+
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/filter")
+    public ResponseEntity<Object> filterByDate(
+            @RequestParam(name = "to", defaultValue = "2024-04-20") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date to,
+            @RequestParam(name = "from", defaultValue = "2024-04-20") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date from) {
+
+        return ResponseEntity.ok(userRepository.findByBirthDateBetween(from, to));
     }
 
 }
