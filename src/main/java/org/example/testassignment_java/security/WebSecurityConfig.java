@@ -37,7 +37,7 @@ public class WebSecurityConfig {
 
                 }))
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("api/auth/signin","api/auth/login").permitAll()
+                        .requestMatchers("api/auth/signup","api/auth/login").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class)
